@@ -27,6 +27,16 @@ class SymbolTable { // This symbol table contains a list of declarations
         return scopeReg;
     }
 
+    public ArrayList<String> getGlobals() {
+        ArrayList<String> globalList = new ArrayList<String>();
+        for (int x = 0; x < this.objectList.size(); x++) {
+            if(this.objectList.get(x).scopeReg.equals("GLOB")) {
+                globalList.add(this.objectList.get(x).varName);
+            }
+        }
+        return globalList;
+    }
+
     public void printSymbolTable() {
         System.out.println("Symbol table " + this.scope);
         for (int x = 0; x < this.objectList.size(); x++) {
@@ -51,6 +61,19 @@ class SymbolTable { // This symbol table contains a list of declarations
         int num = 0;
         for (int x = 0; x < this.objectList.size(); x++) {
             if(this.objectList.get(x).scopeReg.startsWith("$P")) {
+                num++;
+
+            }
+        }
+
+        return num;
+    }
+
+
+    public int getNumInScope() {
+        int num = 0;
+        for (int x = 0; x < this.objectList.size(); x++) {
+            if(this.objectList.get(x).scopeReg.startsWith("$")) {
                 num++;
 
             }
